@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 9.0.1, 2023-02-11T19:36:02. -->
+<!-- Written by QtCreator 9.0.1, 2023-02-11T22:09:32. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -99,7 +99,6 @@
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
     <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_GENERATOR:STRING=Ninja
 -DCMAKE_BUILD_TYPE:STRING=Debug
--DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{IDE:ResourcePath}/package-manager/auto-setup.cmake
 -DQT_QMAKE_EXECUTABLE:FILEPATH=%{Qt:qmakeExecutable}
 -DCMAKE_PREFIX_PATH:PATH=%{Qt:QT_INSTALL_PREFIX}
 -DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
@@ -156,14 +155,13 @@
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
     <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_GENERATOR:STRING=Ninja
 -DCMAKE_BUILD_TYPE:STRING=Release
--DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{IDE:ResourcePath}/package-manager/auto-setup.cmake
 -DQT_QMAKE_EXECUTABLE:FILEPATH=%{Qt:qmakeExecutable}
 -DCMAKE_PREFIX_PATH:PATH=%{Qt:QT_INSTALL_PREFIX}
 -DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
 -DCMAKE_CXX_COMPILER:FILEPATH=%{Compiler:Executable:Cxx}
 -DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
 %{CMAKE_OSX_ARCHITECTURES:DefaultFlag}</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/dontsoft/dev/private/build-devtools-Qt_6_4_2_for_macOS-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/dontsoft/dev/private/devtools/../build-devtools-Qt_6_4_2_for_macOS-Release</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="QString" key="CMakeProjectManager.MakeStep.BuildPreset"></value>
@@ -210,14 +208,13 @@
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
     <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_GENERATOR:STRING=Ninja
 -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
--DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{IDE:ResourcePath}/package-manager/auto-setup.cmake
 -DQT_QMAKE_EXECUTABLE:FILEPATH=%{Qt:qmakeExecutable}
 -DCMAKE_PREFIX_PATH:PATH=%{Qt:QT_INSTALL_PREFIX}
 -DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
 -DCMAKE_CXX_COMPILER:FILEPATH=%{Compiler:Executable:Cxx}
 -DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
 %{CMAKE_OSX_ARCHITECTURES:DefaultFlag}</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/dontsoft/dev/private/build-devtools-Qt_6_4_2_for_macOS-RelWithDebInfo</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/dontsoft/dev/private/devtools/../build-devtools-Qt_6_4_2_for_macOS-RelWithDebInfo</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="QString" key="CMakeProjectManager.MakeStep.BuildPreset"></value>
@@ -264,7 +261,6 @@
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
     <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_GENERATOR:STRING=Ninja
 -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo
--DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{IDE:ResourcePath}/package-manager/auto-setup.cmake
 -DQT_QMAKE_EXECUTABLE:FILEPATH=%{Qt:qmakeExecutable}
 -DCMAKE_PREFIX_PATH:PATH=%{Qt:QT_INSTALL_PREFIX}
 -DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
@@ -272,7 +268,7 @@
 -DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
 %{CMAKE_OSX_ARCHITECTURES:DefaultFlag}</value>
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/dontsoft/dev/private/build-devtools-Qt_6_4_2_for_macOS-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/dontsoft/dev/private/devtools/../build-devtools-Qt_6_4_2_for_macOS-Profile</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="QString" key="CMakeProjectManager.MakeStep.BuildPreset"></value>
@@ -319,14 +315,13 @@
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
     <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_GENERATOR:STRING=Ninja
 -DCMAKE_BUILD_TYPE:STRING=MinSizeRel
--DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{IDE:ResourcePath}/package-manager/auto-setup.cmake
 -DQT_QMAKE_EXECUTABLE:FILEPATH=%{Qt:qmakeExecutable}
 -DCMAKE_PREFIX_PATH:PATH=%{Qt:QT_INSTALL_PREFIX}
 -DCMAKE_C_COMPILER:FILEPATH=%{Compiler:Executable:C}
 -DCMAKE_CXX_COMPILER:FILEPATH=%{Compiler:Executable:Cxx}
 -DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
 %{CMAKE_OSX_ARCHITECTURES:DefaultFlag}</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/dontsoft/dev/private/build-devtools-Qt_6_4_2_for_macOS-MinSizeRel</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/dontsoft/dev/private/devtools/../build-devtools-Qt_6_4_2_for_macOS-MinSizeRel</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="QString" key="CMakeProjectManager.MakeStep.BuildPreset"></value>
