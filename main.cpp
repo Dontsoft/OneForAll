@@ -92,6 +92,25 @@ int main(int argc, char *argv[])
                                                            .arg(VERSION_PATCH));
     appinformation->set(AppInformation::Type::Version_Long, VERSION_STRING);
 
+    appinformation->addThirdPartyInformation(
+        {.type = AppInformation::ThirdPartyInformation::Type::Library,
+         .values = {{AppInformation::Type::Name, QString("yaml-cpp")},
+                    {AppInformation::Type::Author, QString("Jesse Beder")},
+                    {AppInformation::Type::SupportGithub,
+                     QString("https://github.com/jbeder/yaml-cpp")},
+                    {AppInformation::Type::Version, QString("0.7.0")},
+                    {AppInformation::Type::License,
+                     QString(":/third-party/yaml-cpp/LICENSE")}}});
+    appinformation->addThirdPartyInformation(
+        {.type = AppInformation::ThirdPartyInformation::Type::Library,
+         .values = {{AppInformation::Type::Name, QString("stduuid")},
+                    {AppInformation::Type::Author, QString("Marius Bancila")},
+                    {AppInformation::Type::SupportGithub,
+                     QString("https://github.com/mariusbancila/stduuid")},
+                    {AppInformation::Type::Version, QString("1.2.3")},
+                    {AppInformation::Type::License,
+                     QString(":/third-party/stduuid/LICENSE")}}});
+
     qInstallMessageHandler(message_handler);
 
     auto moduleRegistry = QSharedPointer<ModuleRegistry>::create();

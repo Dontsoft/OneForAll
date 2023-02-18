@@ -57,7 +57,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
@@ -69,6 +69,9 @@ set(TS_FILES devtools_de_DE.ts)
 
 set(PROJECT_SOURCES
         main.cpp
+
+        resources.qrc
+
         devtoolsmainwindow.cpp
         devtoolsmainwindow.h
         devtoolsmainwindow.ui
@@ -85,6 +88,11 @@ set(PROJECT_SOURCES
         modules/categories.hpp
         modules/dummymodule.hpp
         modules/dummymodule.cpp
+        modules/generator/uuidgeneratormodule.hpp
+        modules/generator/uuidgeneratormodule.cpp
+        modules/generator/uuidgeneratormodulewidget.hpp
+        modules/generator/uuidgeneratormodulewidget.cpp
+        modules/generator/uuidgeneratormodulewidget.ui
 
         # Core
         core/dependant.hpp

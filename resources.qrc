@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/third-party">
+        <file alias="stduuid/LICENSE">external/stduuid/LICENSE</file>
+        <file alias="yaml-cpp/LICENSE">external/yaml-cpp/LICENSE</file>
+    </qresource>
+</RCC>
