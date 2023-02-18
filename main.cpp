@@ -1,26 +1,27 @@
-#include "devtoolsmainwindow.h"
-
-#include "spdlog/sinks/rotating_file_sink.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/spdlog.h"
-#include <type_traits>
-
 #include <QApplication>
 #include <QLocale>
 #include <QSharedPointer>
 #include <QTranslator>
+#include <type_traits>
+
+#include "log/loggable.hpp"
+#include "log/qtfmt.hpp"
+#include "spdlog/sinks/rotating_file_sink.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+#include "spdlog/spdlog.h"
 
 #include "build.hpp"
 #include "config/engine/configjsonfileengine.hpp"
-#include "log/loggable.hpp"
-#include "log/qtfmt.hpp"
+#include "devtoolsmainwindow.h"
+#include "modules/dummymodule.hpp"
 #include "utility/appinformation.hpp"
 #include "utility/pathregistry.hpp"
 
-constexpr std::size_t MAX_LOG_SIZE = 1024 * 1024 * 2;  // 2MB
+constexpr std::size_t MAX_LOG_SIZE = 1024 * 1024 * 2; // 2MB
 constexpr std::size_t MAX_LOG_COUNT = 50;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
     QApplication a(argc, argv);
 
     QApplication::setApplicationName(APP_NAME);
@@ -33,18 +34,19 @@ int main(int argc, char* argv[]) {
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
 
-    for (const QString& locale : uiLanguages) {
+    for (const QString &locale : uiLanguages)
+    {
         const QString baseName = "devtools_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
+        if (translator.load(":/i18n/" + baseName))
+        {
             a.installTranslator(&translator);
-
             break;
         }
     }
 
-    auto registry =
-        QSharedPointer<std::conditional<IS_PORTABLE, UserOnlyPathRegistry,
-                                        SystemPathRegistry>::type>::create();
+    auto registry
+        = QSharedPointer<std::conditional<IS_PORTABLE, UserOnlyPathRegistry,
+                                          SystemPathRegistry>::type>::create();
     registry->cache();
 
     auto configEngine = QSharedPointer<ConfigJsonFileEngine>::create(
@@ -54,10 +56,10 @@ int main(int argc, char* argv[]) {
 
     auto sinks = std::vector<std::shared_ptr<spdlog::sinks::sink>>{
         std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
-            registry->native<PathRegistry::Log>() +
-                QString("/%1.log")
-                    .arg(QDate::currentDate().toString("yyyy-MM-dd"))
-                    .toStdString(),
+            registry->native<PathRegistry::Log>()
+                + QString("/%1.log")
+                      .arg(QDate::currentDate().toString("yyyy-MM-dd"))
+                      .toStdString(),
             MAX_LOG_SIZE, MAX_LOG_COUNT, true),
         std::make_shared<spdlog::sinks::stdout_color_sink_mt>()};
 
@@ -92,8 +94,16 @@ int main(int argc, char* argv[]) {
 
     qInstallMessageHandler(message_handler);
 
+    auto moduleRegistry = QSharedPointer<ModuleRegistry>::create();
+
+    for (int i = 0; i < 20; ++i)
+    {
+        moduleRegistry->addModule(
+            QSharedPointer<DummyModule>::create(i + 1, "Category"));
+    }
+
     DevToolsMainWindow::Dependency dependency(configEngine, registry,
-                                              appinformation);
+                                              appinformation, moduleRegistry);
 
     DevToolsMainWindow w(dependency);
     w.show();

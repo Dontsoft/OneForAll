@@ -73,6 +73,19 @@ set(PROJECT_SOURCES
         devtoolsmainwindow.h
         devtoolsmainwindow.ui
 
+        # Models
+        models/modulenavigationmodel.hpp
+        models/modulenavigationmodel.cpp
+
+        # Modules
+        modules/moduleregistry.hpp
+        modules/moduleregistry.cpp
+        modules/module.hpp
+        modules/module.cpp
+        modules/categories.hpp
+        modules/dummymodule.hpp
+        modules/dummymodule.cpp
+
         # Core
         core/dependant.hpp
         core/observer.hpp
