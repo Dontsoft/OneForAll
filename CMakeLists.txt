@@ -95,6 +95,11 @@ set(PROJECT_SOURCES
         modules/generator/uuidgeneratormodulewidget.hpp
         modules/generator/uuidgeneratormodulewidget.cpp
         modules/generator/uuidgeneratormodulewidget.ui
+        modules/decoder/uuiddecodermodule.hpp
+        modules/decoder/uuiddecodermodule.cpp
+        modules/decoder/uuiddecodermodulewidget.hpp
+        modules/decoder/uuiddecodermodulewidget.cpp
+        modules/decoder/uuiddecodermodulewidget.ui
 
         # Core
         core/dependant.hpp

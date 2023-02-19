@@ -13,7 +13,7 @@
 #include "build.hpp"
 #include "config/engine/configjsonfileengine.hpp"
 #include "devtoolsmainwindow.h"
-#include "modules/dummymodule.hpp"
+#include "modules/decoder/uuiddecodermodule.hpp"
 #include "modules/generator/uuidgeneratormodule.hpp"
 #include "utility/appinformation.hpp"
 #include "utility/pathregistry.hpp"
@@ -133,6 +133,7 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(message_handler);
 
     auto moduleRegistry = QSharedPointer<ModuleRegistry>::create();
+    moduleRegistry->addModule(QSharedPointer<UUIDDecoderModule>::create());
     moduleRegistry->addModule(QSharedPointer<UUIDGeneratorModule>::create(
         UUIDGeneratorModule::Dependency{configEngine}));
 
