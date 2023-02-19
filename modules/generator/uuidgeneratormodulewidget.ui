@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UUIDGeneratorModuleWidget</class>
+ <widget class="QWidget" name="UUIDGeneratorModuleWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>764</width>
+    <height>487</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,1">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
+     <item>
+      <widget class="QLabel" name="versionLabel">
+       <property name="text">
+        <string>UUID Type / Generation</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="uuidGenerationSelectionComboBox"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="parameterWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="uuidV1ParameterWidget">
+      <layout class="QFormLayout" name="formLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="uuidV1NetworkInterfaceLabel">
+         <property name="text">
+          <string>Network Interface</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="uuidV1NetworkInterfaceComboBox"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QCheckBox" name="uuidV1RandomClockSequenceCheckBox">
+         <property name="text">
+          <string>Use Random Clock Sequence</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="uuidV3ParameterWidget">
+      <layout class="QFormLayout" name="formLayout_4">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="v3NamespaceLabel">
+         <property name="text">
+          <string>Namespace</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="v3NamespaceEdit"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="v3BaseDataLabel">
+         <property name="text">
+          <string>Base Data</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="v3BaseDataEdit"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="v3PredefinedNamespacesLabel">
+           <property name="text">
+            <string>Predefined Namespaces</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v3DNSNamespaceButton">
+           <property name="text">
+            <string>DNS</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v3URLNamespaceButton">
+           <property name="text">
+            <string>URL</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v3OIDNamespaceButton">
+           <property name="text">
+            <string>OID</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v3X500DNNamespaceButton">
+           <property name="text">
+            <string>X.500 DN</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v3RandomNamespaceButton">
+           <property name="text">
+            <string>Random</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="uuidV4ParameterWidget"/>
+     <widget class="QWidget" name="uuidV5ParameterWidget">
+      <layout class="QFormLayout" name="formLayout_2">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="v5NamespaceLabel">
+         <property name="text">
+          <string>Namespace</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="v5NamespaceEdit"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="v5PredefinedNamespacesLabel">
+           <property name="text">
+            <string>Predefined Namespaces</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v5DNSNamespaceButton">
+           <property name="text">
+            <string>DNS</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v5URLNamespaceButton">
+           <property name="text">
+            <string>URL</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v5OIDNamespaceButton">
+           <property name="text">
+            <string>OID</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v5X500DNNamespaceButton">
+           <property name="text">
+            <string>X.500 DN</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="v5RandomNamespaceButton">
+           <property name="text">
+            <string>Random</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="v5BaseDataLabel">
+         <property name="text">
+          <string>Base Data</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="v5BaseDataEdit"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="uuidSystemParameterWidget"/>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="moreOutputOptionsButton">
+       <property name="text">
+        <string>More Output Options &gt;&gt;&gt;</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="regenerateButton">
+       <property name="text">
+        <string>Generate</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="copyOutputButton">
+       <property name="text">
+        <string>Copy</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="clearOutputButton">
+       <property name="text">
+        <string>Clear</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QWidget" name="outputOptionsWidget" native="true">
+     <layout class="QFormLayout" name="formLayout_3">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="outputCountLabel">
+        <property name="text">
+         <string>Output Count</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="outputCountSpinBox">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>100000</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="outputTypeLabel">
+        <property name="text">
+         <string>Output Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="outputTypeComboBox">
+        <item>
+         <property name="text">
+          <string>With Braces</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Without Braces</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Id128</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QCheckBox" name="outputUppercaseCheckBox">
+        <property name="text">
+         <string>Uppercase</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTextEdit" name="outputEdit">
+     <property name="font">
+      <font>
+       <family>Courier New</family>
+      </font>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

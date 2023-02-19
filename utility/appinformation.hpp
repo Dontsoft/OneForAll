@@ -15,17 +15,30 @@ class AppInformation {
         Type,
         Version,
         Version_Long,
-        LogoPath
+        LogoPath,
+        License
     };
 
-    struct ThirdPartyInformation {};
+    struct ThirdPartyInformation
+    {
+        enum class Type
+        {
+            Library
+        };
+
+        Type type;
+        QMap<AppInformation::Type, QString> values;
+    };
 
     void set(Type type, const QString& value);
     QString get(Type type) const;
     bool has(Type type) const;
 
-   private:
+    void addThirdPartyInformation(const ThirdPartyInformation& information);
+
+private:
     QMap<Type, QString> _values;
+    QList<ThirdPartyInformation> _thirdPartyInformation;
 };
 
 #endif

@@ -57,18 +57,23 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network Gui LinguistTools)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network Gui LinguistTools)
 find_package(spdlog REQUIRED)
 find_package(nlohmann_json REQUIRED)
+
+add_compile_definitions(UUID_SYSTEM_GENERATOR UUID_TIME_GENERATOR)
 
 set(TS_FILES devtools_de_DE.ts)
 
 set(PROJECT_SOURCES
         main.cpp
+
+        resources.qrc
+
         devtoolsmainwindow.cpp
         devtoolsmainwindow.h
         devtoolsmainwindow.ui
@@ -85,6 +90,16 @@ set(PROJECT_SOURCES
         modules/categories.hpp
         modules/dummymodule.hpp
         modules/dummymodule.cpp
+        modules/generator/uuidgeneratormodule.hpp
+        modules/generator/uuidgeneratormodule.cpp
+        modules/generator/uuidgeneratormodulewidget.hpp
+        modules/generator/uuidgeneratormodulewidget.cpp
+        modules/generator/uuidgeneratormodulewidget.ui
+        modules/decoder/uuiddecodermodule.hpp
+        modules/decoder/uuiddecodermodule.cpp
+        modules/decoder/uuiddecodermodulewidget.hpp
+        modules/decoder/uuiddecodermodulewidget.cpp
+        modules/decoder/uuiddecodermodulewidget.ui
 
         # Core
         core/dependant.hpp
@@ -118,6 +133,9 @@ set(PROJECT_SOURCES
         utility/pathregistry.cpp
         utility/pathregistry.hpp
         ${TS_FILES}
+
+        # Third Party
+        external/stduuid/uuid.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -140,7 +158,7 @@ set(YAML_CPP_BUILD_CONTRIB OFF CACHE INTERNAL "")
 set(YAML_CPP_INSTALL OFF CACHE INTERNAL "")
 add_subdirectory(external/yaml-cpp)
 
-target_link_libraries(devtools PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(devtools PRIVATE Qt6::Widgets Qt6::Network Qt6::Gui)
 target_link_libraries(devtools PRIVATE spdlog::spdlog)
 target_link_libraries(devtools PUBLIC nlohmann_json::nlohmann_json)
 target_link_libraries(devtools PUBLIC yaml-cpp)
