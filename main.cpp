@@ -14,6 +14,7 @@
 #include "config/engine/configjsonfileengine.hpp"
 #include "devtoolsmainwindow.h"
 #include "modules/dummymodule.hpp"
+#include "modules/generator/uuidgeneratormodule.hpp"
 #include "utility/appinformation.hpp"
 #include "utility/pathregistry.hpp"
 
@@ -94,6 +95,24 @@ int main(int argc, char *argv[])
 
     appinformation->addThirdPartyInformation(
         {.type = AppInformation::ThirdPartyInformation::Type::Library,
+         .values = {{AppInformation::Type::Name, QString("spdlog")},
+                    {AppInformation::Type::Author, QString("Gabi Melman")},
+                    {AppInformation::Type::SupportGithub,
+                     QString("https://github.com/gabime/spdlog")},
+                    {AppInformation::Type::Version, QString("1.11.0")},
+                    {AppInformation::Type::License,
+                     QString(":/third-party/spdlog/LICENSE")}}});
+    appinformation->addThirdPartyInformation(
+        {.type = AppInformation::ThirdPartyInformation::Type::Library,
+         .values = {{AppInformation::Type::Name, QString("nlohmann-json")},
+                    {AppInformation::Type::Author, QString("Niels Lohmann")},
+                    {AppInformation::Type::SupportGithub,
+                     QString("https://github.com/nlohmann/json")},
+                    {AppInformation::Type::Version, QString("3.11.2")},
+                    {AppInformation::Type::License,
+                     QString(":/third-party/nlohmann-json/LICENSE")}}});
+    appinformation->addThirdPartyInformation(
+        {.type = AppInformation::ThirdPartyInformation::Type::Library,
          .values = {{AppInformation::Type::Name, QString("yaml-cpp")},
                     {AppInformation::Type::Author, QString("Jesse Beder")},
                     {AppInformation::Type::SupportGithub,
@@ -114,12 +133,8 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(message_handler);
 
     auto moduleRegistry = QSharedPointer<ModuleRegistry>::create();
-
-    for (int i = 0; i < 20; ++i)
-    {
-        moduleRegistry->addModule(
-            QSharedPointer<DummyModule>::create(i + 1, "Category"));
-    }
+    moduleRegistry->addModule(QSharedPointer<UUIDGeneratorModule>::create(
+        UUIDGeneratorModule::Dependency{configEngine}));
 
     DevToolsMainWindow::Dependency dependency(configEngine, registry,
                                               appinformation, moduleRegistry);
