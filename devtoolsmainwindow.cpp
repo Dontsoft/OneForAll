@@ -38,6 +38,7 @@ DevToolsMainWindow::DevToolsMainWindow(const Dependency& dependency,
     connect(ui->navigationTreeView->selectionModel(),
             &QItemSelectionModel::currentChanged, this,
             &DevToolsMainWindow::handleTreeViewSelection);
+    ui->navigationTreeView->expandAll();
 }
 
 DevToolsMainWindow::~DevToolsMainWindow() { delete ui; }

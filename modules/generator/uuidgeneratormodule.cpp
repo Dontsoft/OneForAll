@@ -15,7 +15,7 @@
 // Additional 100ns intervals from 1582 as chrono utc clock only counts from
 // Already divided by 100 to calculate tick 100 ns tick count
 constexpr auto SECOND_TICKS_FROM_1582_TO_EPOCH
-    = std::chrono::seconds(12218428800 / 100);
+    = std::chrono::seconds(12219292800 / 100);
 
 UUIDGeneratorModule::UUIDGeneratorModule(const Dependency &dependency,
                                          QObject *parent)
@@ -99,10 +99,14 @@ QString UUIDGeneratorModule::generateRandomMacAddress() const
                                  0, 16));
 }
 
+constexpr quint8 VERSION_V1 = 0b1000;
+constexpr quint8 VARIANT = 0b100;
+
 quint16 UUIDGeneratorModule::padTimestampWithVersion(quint16 timeHigh,
                                                      int version) const
 {
-    return timeHigh | ((0xF & version) << 12);
+
+    return timeHigh | (VERSION_V1 << 12);
 }
 
 void UUIDGeneratorModule::generate(int version, int count)
@@ -162,11 +166,11 @@ QUuid UUIDGeneratorModule::regenerateV1() const
     const quint64 timestamp = generateTimestamp();
     const quint32 timeLow = timestamp & 0xFFFFFFFF;
     const quint16 timeMid = (timestamp >> 32) & 0xFFFF;
-    const quint16 timeHigh
-        = padTimestampWithVersion((timestamp >> 48) & 0x0FFF, 1);
+    const quint16 timeHigh = ((timestamp >> 48) & 0x0FFF) | (VERSION_V1 << 9);
     const quint16 clockSequence = generateV1ClockSequence();
     const quint8 clockSequenceLow = clockSequence & 0xFF;
-    const quint8 clockSequenceHigh = (clockSequence >> 8) & 0x3F;
+    const quint8 clockSequenceHigh
+        = ((clockSequence >> 8) & 0x3F) | (VARIANT << 5);
 
     QString hardwareAddress = _v1HardwareAddress;
 
@@ -182,8 +186,8 @@ QUuid UUIDGeneratorModule::regenerateV1() const
     quint8 b5 = static_cast<quint8>(splittedAddress[4].toInt(nullptr, 16));
     quint8 b6 = static_cast<quint8>(splittedAddress[5].toInt(nullptr, 16));
 
-    return QUuid(timeLow, timeMid, timeHigh, clockSequenceLow,
-                 clockSequenceHigh, b1, b2, b3, b4, b5, b6);
+    return QUuid(timeLow, timeMid, timeHigh, clockSequenceHigh,
+                 clockSequenceLow, b1, b2, b3, b4, b5, b6);
 }
 
 QUuid UUIDGeneratorModule::regenerateV2() const
