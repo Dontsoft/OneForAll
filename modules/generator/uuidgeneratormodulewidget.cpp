@@ -156,7 +156,7 @@ void UUIDGeneratorModuleWidget::generatedNewUUIDs(const QList<QUuid>& uuids)
         uuidStringList.append(uuid.toString(static_cast<QUuid::StringFormat>(
             ui->outputTypeComboBox->currentIndex())));
     }
-    auto text = uuidStringList.join(QChar(QChar::LineSeparator));
+    auto text = uuidStringList.join(QChar(QChar::LineFeed));
     if (ui->outputUppercaseCheckBox->isChecked())
     {
         text = text.toUpper();
