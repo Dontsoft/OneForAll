@@ -90,11 +90,20 @@ set(PROJECT_SOURCES
         modules/categories.hpp
         modules/dummymodule.hpp
         modules/dummymodule.cpp
+
+        ## Generators
         modules/generator/uuidgeneratormodule.hpp
         modules/generator/uuidgeneratormodule.cpp
         modules/generator/uuidgeneratormodulewidget.hpp
         modules/generator/uuidgeneratormodulewidget.cpp
         modules/generator/uuidgeneratormodulewidget.ui
+        modules/generator/passwordgeneratormodule.hpp
+        modules/generator/passwordgeneratormodule.cpp
+        modules/generator/passwordgeneratormodulewidget.hpp
+        modules/generator/passwordgeneratormodulewidget.cpp
+        modules/generator/passwordgeneratormodulewidget.ui
+
+        ## Decorders
         modules/decoder/uuiddecodermodule.hpp
         modules/decoder/uuiddecodermodule.cpp
         modules/decoder/uuiddecodermodulewidget.hpp
@@ -132,6 +141,11 @@ set(PROJECT_SOURCES
         utility/appinformation.hpp
         utility/pathregistry.cpp
         utility/pathregistry.hpp
+
+        # random
+        random/random.hpp
+        random/random.cpp
+
         ${TS_FILES}
 
         # Third Party

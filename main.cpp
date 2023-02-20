@@ -14,7 +14,9 @@
 #include "config/engine/configjsonfileengine.hpp"
 #include "devtoolsmainwindow.h"
 #include "modules/decoder/uuiddecodermodule.hpp"
+#include "modules/generator/passwordgeneratormodule.hpp"
 #include "modules/generator/uuidgeneratormodule.hpp"
+#include "random/random.hpp"
 #include "utility/appinformation.hpp"
 #include "utility/pathregistry.hpp"
 
@@ -136,6 +138,8 @@ int main(int argc, char *argv[])
     moduleRegistry->addModule(QSharedPointer<UUIDDecoderModule>::create());
     moduleRegistry->addModule(QSharedPointer<UUIDGeneratorModule>::create(
         UUIDGeneratorModule::Dependency{configEngine}));
+    moduleRegistry->addModule(QSharedPointer<PasswordGeneratorModule>::create(
+        PasswordGeneratorModule::Dependency{QSharedPointer<Random>::create()}));
 
     DevToolsMainWindow::Dependency dependency(configEngine, registry,
                                               appinformation, moduleRegistry);

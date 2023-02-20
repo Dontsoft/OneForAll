@@ -18,11 +18,10 @@
 	background: transparent;
 }
 
-QLineEdit {
+QLineEdit, QSpinBox, QDoubleSpinBox {
 	min-height: 24px;
 	padding: 4px;
-}
-</string>
+}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
@@ -59,11 +58,27 @@ QLineEdit {
        <number>0</number>
       </property>
       <item>
-       <widget class="QLineEdit" name="navigationFilter">
-        <property name="placeholderText">
-         <string>Search</string>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="leftMargin">
+         <number>12</number>
         </property>
-       </widget>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item>
+         <widget class="QLineEdit" name="navigationFilter">
+          <property name="placeholderText">
+           <string>Search</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QTreeView" name="navigationTreeView">
