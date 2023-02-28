@@ -12,7 +12,7 @@
 #include "utility/pathregistry.hpp"
 
 class ModuleNavigationModel;
-class QSortFilterProxyModel;
+class ModuleNavigationFilterModel;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -36,15 +36,14 @@ public:
     ~DevToolsMainWindow();
 public slots:
     void updateWindowTitle(const QString& title = QString());
+    void searchStringChanged(const QString& text);
 
 private slots:
     void handleTreeViewSelection(const QModelIndex& current,
                                  const QModelIndex& previous);
 
-    void on_navigationTreeView_clicked(const QModelIndex& index);
-
 private:
     Ui::DevToolsMainWindow* ui;
-    QSortFilterProxyModel* _navigationModel;
+    ModuleNavigationFilterModel* _navigationModel;
 };
 #endif // DEVTOOLSMAINWINDOW_H

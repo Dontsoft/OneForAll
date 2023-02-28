@@ -20,11 +20,6 @@ bool ModuleRegistry::addModule(const QSharedPointer<Module>& module)
         return false;
     }
     _moduleLookupTable.insert(module->getIdentifier(), module);
-    if (!_modules.contains(module->getCategory()))
-    {
-        _modules.insert(module->getCategory(), {});
-    }
-    _modules[module->getCategory()].append(module->getIdentifier());
     return true;
 }
 
@@ -51,60 +46,23 @@ void ModuleRegistry::changeFavoritePosition(
     _favorites[newPosition] = identifier;
 }
 
-QList<QString> ModuleRegistry::getCategoryRows() const
-{
-    QList<QString> rows{tr("Favorites")};
-    for (auto it = std::begin(_modules); it != std::end(_modules); ++it)
-    {
-        rows.append(it.key());
-    }
-    return rows;
-}
-
-QList<Module::Identifier> ModuleRegistry::getModulesForCategory(
-    int categoryIndex) const
-{
-    if (categoryIndex == 0)
-    {
-        return _favorites;
-    }
-    if ((categoryIndex - 1) >= _modules.size())
-    {
-        return {};
-    }
-    const auto category = _modules.keys()[categoryIndex - 1];
-    return _modules[category];
-}
-
-QString ModuleRegistry::getModuleNameForIdentifier(
-    const Module::Identifier& identifier) const
-{
-    const auto _module = _moduleLookupTable.value(identifier);
-    if (_module.isNull())
-    {
-        return QString();
-    }
-    return _module->getName();
-}
-
-QIcon ModuleRegistry::getModuleIconForIdentifier(
-    const Module::Identifier& identifier) const
-{
-    const auto _module = _moduleLookupTable.value(identifier);
-    if (_module.isNull())
-    {
-        return QIcon();
-    }
-    return _module->getIcon();
-}
-
-QSharedPointer<Module> ModuleRegistry::getModuleForIdentifier(
+QSharedPointer<Module> ModuleRegistry::getModule(
     const Module::Identifier& identifier) const
 {
     return _moduleLookupTable.value(identifier);
 }
 
+QSharedPointer<Module> ModuleRegistry::getModule(int row) const
+{
+    return getModules()[row];
+}
+
 QList<QSharedPointer<Module>> ModuleRegistry::getModules() const
 {
     return _moduleLookupTable.values();
+}
+
+int ModuleRegistry::getModuleCount() const
+{
+    return _moduleLookupTable.size();
 }

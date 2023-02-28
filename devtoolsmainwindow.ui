@@ -14,11 +14,7 @@
    <string>DevToolsMainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QAbstractItemView {
-	background: transparent;
-}
-
-QLineEdit, QSpinBox, QDoubleSpinBox {
+   <string notr="true">QLineEdit, QSpinBox, QDoubleSpinBox {
 	min-height: 24px;
 	padding: 4px;
 }</string>
@@ -81,16 +77,10 @@ QLineEdit, QSpinBox, QDoubleSpinBox {
        </layout>
       </item>
       <item>
-       <widget class="QTreeView" name="navigationTreeView">
+       <widget class="QListView" name="navigationListView">
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
-        <property name="animated">
-         <bool>true</bool>
-        </property>
-        <attribute name="headerVisible">
-         <bool>false</bool>
-        </attribute>
        </widget>
       </item>
      </layout>
@@ -106,7 +96,7 @@ QLineEdit, QSpinBox, QDoubleSpinBox {
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>43</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
