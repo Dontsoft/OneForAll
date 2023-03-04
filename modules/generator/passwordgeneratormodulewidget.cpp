@@ -1,6 +1,8 @@
 #include "passwordgeneratormodulewidget.hpp"
 #include "ui_passwordgeneratormodulewidget.h"
 
+#include <QClipboard>
+
 PasswordGeneratorModuleWidget::PasswordGeneratorModuleWidget(QWidget *parent) :
       QWidget(parent),
       ui(new Ui::PasswordGeneratorModuleWidget)
@@ -67,6 +69,8 @@ PasswordGeneratorModuleWidget::PasswordGeneratorModuleWidget(QWidget *parent) :
             &PasswordGeneratorModuleWidget::advancedConfigurationClicked);
     connect(ui->generateButton, &QPushButton::clicked, this,
             &PasswordGeneratorModuleWidget::generate);
+    connect(ui->copyButton, &QPushButton::clicked, this,
+            &PasswordGeneratorModuleWidget::copyOutput);
 
     passwordCountSpinBoxChanged(1);
 
@@ -122,6 +126,19 @@ void PasswordGeneratorModuleWidget::passwordsGenerated(
     ui->singlePasswordEdit->setText(passwords.first());
     ui->multiplePasswordEdit->setPlainText(
         passwords.join(QChar(QChar::LineFeed).unicode()));
+}
+
+void PasswordGeneratorModuleWidget::copyOutput()
+{
+    QClipboard* clipboard = QGuiApplication::clipboard();
+    if (ui->passwordCountSpinBox->value() == 1)
+    {
+        clipboard->setText(ui->singlePasswordEdit->text());
+    }
+    else
+    {
+        clipboard->setText(ui->multiplePasswordEdit->toPlainText());
+    }
 }
 
 void PasswordGeneratorModuleWidget::advancedConfigurationClicked(bool checked)

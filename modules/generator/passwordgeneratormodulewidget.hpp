@@ -45,6 +45,7 @@ signals:
 
 private slots:
 
+    void copyOutput();
     void advancedConfigurationClicked(bool checked);
 
     void passwordLengthSliderValueChanged(int value);
