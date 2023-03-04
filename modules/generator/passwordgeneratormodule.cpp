@@ -158,7 +158,6 @@ void PasswordGeneratorModule::generate()
     {
         passwordList.append(generatePassword(characterGroupList));
     }
-    qInfo() << passwordList;
     emit passwordsGenerated(passwordList);
 }
 
@@ -206,23 +205,31 @@ QByteArray PasswordGeneratorModule::generatePassword(
         = _selectFromEveryGroup
           && (_passwordLength >= characterGroupList.length());
 
+    static const int MAX_REGENERATION = 10;
+    int regenerationIndex = 0;
+
     QList<bool> groupUsed(characterGroupList.size(), false);
 
     const auto random = getDependency<0>();
     QByteArray password;
-    while (password.length() < _passwordLength)
+    while (groupUsed.contains(false) && regenerationIndex < MAX_REGENERATION)
     {
-        int characterGroupIndex = 0;
-        const auto characterGroup
-            = random->selectRandom(characterGroupList, &characterGroupIndex);
-        qInfo() << __LINE__ << characterGroup;
-        groupUsed[characterGroupIndex] = true;
-        password.append(random->selectRandom(characterGroup));
-        if (password.length() > _passwordLength)
+        password.clear();
+        while (password.length() < _passwordLength)
         {
-            password.remove(0, 1);
+            int characterGroupIndex = 0;
+            const auto characterGroup = random->selectRandom(
+                characterGroupList, &characterGroupIndex);
+            groupUsed[characterGroupIndex] = true;
+            password.append(random->selectRandom(characterGroup));
         }
+        if (!needsEveryGroup)
+        {
+            break;
+        }
+        regenerationIndex += 1;
     }
+
     random->randomize(password, qMax(1, _randomizeRounds));
     return password;
 }

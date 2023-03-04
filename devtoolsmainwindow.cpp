@@ -3,6 +3,7 @@
 
 #include <QSortFilterProxyModel>
 
+#include "models/modulenavigationfiltermodel.hpp"
 #include "models/modulenavigationmodel.hpp"
 
 #include "spdlog/spdlog.h"
@@ -22,7 +23,7 @@ DevToolsMainWindow::DevToolsMainWindow(const Dependency& dependency,
                 QSharedPointer<AppInformation>, QSharedPointer<ModuleRegistry>>(
           dependency),
       Loggable("Mainwindow"), ui(new Ui::DevToolsMainWindow),
-      _navigationModel(new QSortFilterProxyModel(this))
+      _navigationModel(new ModuleNavigationFilterModel(this))
 {
     ui->setupUi(this);
     const auto moduleRegistry
@@ -34,11 +35,16 @@ DevToolsMainWindow::DevToolsMainWindow(const Dependency& dependency,
     }
     _navigationModel->setSourceModel(
         new ModuleNavigationModel(moduleRegistry, this));
-    ui->navigationTreeView->setModel(_navigationModel);
-    connect(ui->navigationTreeView->selectionModel(),
+    ui->navigationListView->setModel(_navigationModel);
+    connect(ui->navigationListView->selectionModel(),
             &QItemSelectionModel::currentChanged, this,
             &DevToolsMainWindow::handleTreeViewSelection);
-    ui->navigationTreeView->expandAll();
+    connect(ui->navigationFilter, &QLineEdit::textChanged, this,
+            &DevToolsMainWindow::searchStringChanged);
+    ui->navigationListView->setCurrentIndex(
+        ui->navigationListView->model()->index(0, 0));
+    handleTreeViewSelection(ui->navigationListView->model()->index(0, 0),
+                            QModelIndex());
 }
 
 DevToolsMainWindow::~DevToolsMainWindow() { delete ui; }
@@ -59,23 +65,20 @@ void DevToolsMainWindow::handleTreeViewSelection(const QModelIndex& current,
         const auto moduleRegistry
             = getDependency<Dependencies::ModuleRegistryDependency>();
         QSharedPointer<Module> module
-            = moduleRegistry->getModuleForIdentifier(moduleIdentifier);
+            = moduleRegistry->getModule(moduleIdentifier);
         if (!module.isNull())
         {
             ui->contentWidget->setCurrentWidget(module->getWidget());
+            const auto appInformation
+                = getDependency<Dependencies::AppInformationDependency>();
+            setWindowTitle(QString("%1 - %2").arg(
+                appInformation->get(AppInformation::Type::Name),
+                module->getName()));
         }
     }
 }
 
-void DevToolsMainWindow::on_navigationTreeView_clicked(const QModelIndex& index)
+void DevToolsMainWindow::searchStringChanged(const QString& text)
 {
-    const auto isCategoryAndHasChildren
-        = qvariant_cast<bool>(_navigationModel->data(
-            index, ModuleNavigationModel::CategoryHasModulesRole));
-    if (!isCategoryAndHasChildren)
-    {
-        return;
-    }
-    ui->navigationTreeView->setExpanded(
-        index, !ui->navigationTreeView->isExpanded(index));
+    _navigationModel->setFilterRegularExpression(text);
 }

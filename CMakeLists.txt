@@ -81,6 +81,8 @@ set(PROJECT_SOURCES
         # Models
         models/modulenavigationmodel.hpp
         models/modulenavigationmodel.cpp
+        models/modulenavigationfiltermodel.hpp
+        models/modulenavigationfiltermodel.cpp
 
         # Modules
         modules/moduleregistry.hpp

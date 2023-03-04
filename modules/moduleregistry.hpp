@@ -15,15 +15,11 @@ public:
     explicit ModuleRegistry(QObject* parent = nullptr);
 
     bool addModule(const QSharedPointer<Module>& module);
-    QList<QString> getCategoryRows() const;
-    QList<Module::Identifier> getModulesForCategory(int categoryIndex) const;
-    QString getModuleNameForIdentifier(
+    QSharedPointer<Module> getModule(
         const Module::Identifier& identifier) const;
-    QIcon getModuleIconForIdentifier(
-        const Module::Identifier& identifier) const;
-    QSharedPointer<Module> getModuleForIdentifier(
-        const Module::Identifier& identifier) const;
+    QSharedPointer<Module> getModule(int row) const;
     QList<QSharedPointer<Module>> getModules() const;
+    int getModuleCount() const;
 
 public slots:
     void addAsFavorite(const Module::Identifier& identifier);
@@ -35,7 +31,6 @@ signals:
 
 private:
     QList<Module::Identifier> _favorites;
-    QMap<QString, QList<Module::Identifier>> _modules;
     QMap<Module::Identifier, QSharedPointer<Module>> _moduleLookupTable;
 };
 #endif // MODULEREGISTRY_HPP
