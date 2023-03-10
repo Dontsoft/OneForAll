@@ -20,15 +20,16 @@ constexpr auto SECOND_TICKS_FROM_1582_TO_EPOCH
 UUIDGeneratorModule::UUIDGeneratorModule(const Dependency &dependency,
                                          QObject *parent)
     : Module(tr("UUID Generator"), "com.dontsoft.devtools.uuidgenerator",
-             QObject::tr("Generators"), QIcon(), parent),
+             QObject::tr("Generators"), QIcon(),
+             new UUIDGeneratorModuleWidget({tr("UUID v1"), tr("UUID v3"),
+                                            tr("UUID v4"), tr("UUID v5"),
+                                            tr("System Generator")}),
+             parent),
       Dependant<QSharedPointer<ConfigEngine>>(dependency),
-      Loggable("com.dontsoft.devtools.uuidgenerator"),
-      _widget(new UUIDGeneratorModuleWidget({tr("UUID v1"), tr("UUID v3"),
-                                             tr("UUID v4"), tr("UUID v5"),
-                                             tr("System Generator")}))
+      Loggable("com.dontsoft.devtools.uuidgenerator")
 {
 
-    auto widgetCasted = static_cast<UUIDGeneratorModuleWidget *>(_widget);
+    auto widgetCasted = static_cast<UUIDGeneratorModuleWidget *>(getWidget());
 
     connect(widgetCasted, &UUIDGeneratorModuleWidget::v1NetworkInterfaceChanged,
             this, &UUIDGeneratorModule::v1NetworkInterfaceChanged);
@@ -48,11 +49,6 @@ UUIDGeneratorModule::UUIDGeneratorModule(const Dependency &dependency,
             &UUIDGeneratorModuleWidget::generatedNewUUIDs);
 
     widgetCasted->triggerAllConfigSignals();
-}
-
-QWidget *UUIDGeneratorModule::getWidget() const
-{
-    return _widget;
 }
 
 quint64 UUIDGeneratorModule::generateTimestamp() const

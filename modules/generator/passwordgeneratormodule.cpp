@@ -23,13 +23,14 @@ PasswordGeneratorModule::PasswordGeneratorModule(
     const PasswordGeneratorModule::Dependency &dependency, QObject *parent)
     : Module(tr("Password Generator"),
              "com.dontsoft.devtools.passwordgenerator",
-             QObject::tr("Generators"), QIcon(), parent),
+             QObject::tr("Generators"), QIcon(),
+             new PasswordGeneratorModuleWidget(), parent),
       Dependant<QSharedPointer<Random>>(dependency),
-      Loggable("com.dontsoft.devtools.passwordgenerator"),
-      _widget(new PasswordGeneratorModuleWidget())
+      Loggable("com.dontsoft.devtools.passwordgenerator")
 {
 
-    auto widgetCasted = static_cast<PasswordGeneratorModuleWidget *>(_widget);
+    auto widgetCasted
+        = static_cast<PasswordGeneratorModuleWidget *>(getWidget());
 
     connect(widgetCasted, &PasswordGeneratorModuleWidget::generate, this,
             &PasswordGeneratorModule::generate);
@@ -89,11 +90,6 @@ PasswordGeneratorModule::PasswordGeneratorModule(
             &PasswordGeneratorModuleWidget::passwordsGenerated);
 
     widgetCasted->triggerAllConfigSignals();
-}
-
-QWidget *PasswordGeneratorModule::getWidget() const
-{
-    return _widget;
 }
 
 void PasswordGeneratorModule::generate()

@@ -10,12 +10,6 @@ class UUIDDecoderModule : public Module, public Loggable
     Q_OBJECT
 public:
     explicit UUIDDecoderModule(QObject *parent = nullptr);
-    QWidget* getWidget() const override;
-
-signals:
-
-private:
-    QWidget* _widget;
 };
 
 #endif // UUIDDECODERMODULE_HPP
