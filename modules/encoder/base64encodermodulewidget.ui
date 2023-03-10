@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Base64EncoderModuleWidget</class>
+ <widget class="QWidget" name="Base64EncoderModuleWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>953</width>
+    <height>673</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>12</number>
+   </property>
+   <property name="topMargin">
+    <number>12</number>
+   </property>
+   <property name="rightMargin">
+    <number>12</number>
+   </property>
+   <property name="bottomMargin">
+    <number>12</number>
+   </property>
+   <item>
+    <layout class="QGridLayout" name="gridLayout" columnstretch="0,1">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="encodingModeCaptionLabel">
+       <property name="text">
+        <string>What to encode</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="encodingModeComboBox">
+       <item>
+        <property name="text">
+         <string>Encode Text</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Encode File Content</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="base64OptionsCaptionLabel">
+       <property name="text">
+        <string>Base64 Options</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="base64OptionsComboBox">
+       <item>
+        <property name="text">
+         <string>Base64 + Keep Trailing Equals</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Base64 + Omit Trailing Equals</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Base64 URL + Keep Trailing Equals</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Base64 URL + Omit Trailing Equals</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="textEncodingPage">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPlainTextEdit" name="textEdit"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="fileEncodingPage">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="FileUploadWidget" name="fileUploadWidget" native="true"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLineEdit" name="filePathEdit"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="selectFileButton">
+           <property name="text">
+            <string>Select File</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="encodeButton">
+           <property name="text">
+            <string>Encode</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveAsFileButton">
+       <property name="text">
+        <string>Save as ...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="copyOutputButton">
+       <property name="text">
+        <string>Copy</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="encodedEdit">
+     <property name="font">
+      <font>
+       <family>Courier New</family>
+      </font>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FileUploadWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/fileuploadwidget.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

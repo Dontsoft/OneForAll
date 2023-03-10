@@ -4,14 +4,9 @@
 
 UUIDDecoderModule::UUIDDecoderModule(QObject *parent)
     : Module(tr("UUID Decoder"), "com.dontsoft.devtools.uuiddecoder",
-             QObject ::tr("Decoders"), QIcon(), parent),
-      Loggable("com.dontsoft.devtools.uuiddecoder"),
-      _widget(new UUIDDecoderModuleWidget())
+             QObject ::tr("Decoders"), QIcon(), new UUIDDecoderModuleWidget(),
+             parent),
+      Loggable("com.dontsoft.devtools.uuiddecoder")
 {
 
-}
-
-QWidget *UUIDDecoderModule::getWidget() const
-{
-    return _widget;
 }

@@ -111,11 +111,26 @@ set(PROJECT_SOURCES
         modules/decoder/uuiddecodermodulewidget.hpp
         modules/decoder/uuiddecodermodulewidget.cpp
         modules/decoder/uuiddecodermodulewidget.ui
+        modules/decoder/base64decodermodule.hpp
+        modules/decoder/base64decodermodule.cpp
+        modules/decoder/base64decodermodulewidget.hpp
+        modules/decoder/base64decodermodulewidget.cpp
+        modules/decoder/base64decodermodulewidget.ui
+
+        # Encoders
+        modules/encoder/base64encodermodule.hpp
+        modules/encoder/base64encodermodule.cpp
+        modules/encoder/base64encodermodulewidget.hpp
+        modules/encoder/base64encodermodulewidget.cpp
+        modules/encoder/base64encodermodulewidget.ui
 
         # Core
         core/dependant.hpp
         core/observer.hpp
         core/observable.hpp
+
+        widgets/fileuploadwidget.hpp
+        widgets/fileuploadwidget.cpp
 
         # Log
         log/loggable.hpp

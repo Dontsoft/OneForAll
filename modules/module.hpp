@@ -10,7 +10,10 @@ class Module : public QObject
 public:
     using Identifier = QString;
 
-    virtual QWidget* getWidget() const = 0;
+    virtual QWidget* getWidget() const
+    {
+        return _widget;
+    }
     QString getName() const
     {
         return _name;
@@ -32,6 +35,14 @@ protected:
     explicit Module(const QString& name, const QString& identifier,
                     const QString& category, const QIcon& _icon = QIcon(),
                     QObject* parent = nullptr);
+    Module(const QString& name, const QString& identifier,
+           const QString& category, const QIcon& _icon = QIcon(),
+           QWidget* widget = nullptr, QObject* parent = nullptr);
+
+    void setWidget(QWidget* widget)
+    {
+        _widget = widget;
+    }
 
 signals:
 
@@ -40,6 +51,8 @@ private:
     const Identifier _identifier;
     const QString _category;
     const QIcon _icon;
+
+    QWidget* _widget;
 };
 
 #endif // MODULE_HPP

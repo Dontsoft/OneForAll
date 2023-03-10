@@ -19,7 +19,6 @@ public:
     explicit UUIDGeneratorModule(
         const UUIDGeneratorModule::Dependency& dependency,
         QObject* parent = nullptr);
-    QWidget* getWidget() const override;
 
 public slots:
     void generate(int version, int count);
@@ -48,7 +47,6 @@ private:
     QUuid regenerateTime() const;
     QUuid regenerateSystem() const;
 
-    QWidget* _widget;
     QString _v1HardwareInterfaceName;
     QString _v1HardwareAddress;
     bool _v1UseRandomState;

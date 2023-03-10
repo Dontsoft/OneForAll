@@ -13,7 +13,9 @@
 #include "build.hpp"
 #include "config/engine/configjsonfileengine.hpp"
 #include "devtoolsmainwindow.h"
+#include "modules/decoder/base64decodermodule.hpp"
 #include "modules/decoder/uuiddecodermodule.hpp"
+#include "modules/encoder/base64encodermodule.hpp"
 #include "modules/generator/passwordgeneratormodule.hpp"
 #include "modules/generator/uuidgeneratormodule.hpp"
 #include "random/random.hpp"
@@ -140,7 +142,8 @@ int main(int argc, char *argv[])
         UUIDGeneratorModule::Dependency{configEngine}));
     moduleRegistry->addModule(QSharedPointer<PasswordGeneratorModule>::create(
         PasswordGeneratorModule::Dependency{QSharedPointer<Random>::create()}));
-
+    moduleRegistry->addModule(QSharedPointer<Base64EncoderModule>::create());
+    moduleRegistry->addModule(QSharedPointer<Base64DecoderModule>::create());
     DevToolsMainWindow::Dependency dependency(configEngine, registry,
                                               appinformation, moduleRegistry);
 

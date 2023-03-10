@@ -10,10 +10,6 @@ class DummyModule : public Module
 public:
     explicit DummyModule(int index, const QString& category,
                          QObject* parent = nullptr);
-    QWidget* getWidget() const override;
-
-private:
-    QWidget* _widget;
 };
 
 #endif // DUMMYMODULE_HPP

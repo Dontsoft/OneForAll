@@ -19,7 +19,6 @@ public:
     explicit PasswordGeneratorModule(
         const PasswordGeneratorModule::Dependency& dependency,
         QObject* parent = nullptr);
-    QWidget* getWidget() const override;
 
 public slots:
     void generate();
@@ -52,8 +51,6 @@ private:
 
     QByteArray generatePassword(const QByteArray& characterGroup) const;
     QByteArray generatePassword(QList<QByteArray> characterGroupList) const;
-
-    QWidget* _widget;
 
     int _passwordLength;
     int _passwordCount;
