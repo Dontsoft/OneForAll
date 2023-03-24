@@ -11,7 +11,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
   endif()
 endif()
 
-set(BASE_VERSION 1.0.0)
+set(BASE_VERSION 2023.0.0)
 set(BASE_VERSION_META -alpha)
 set(APP_NAME "Devtools by dontsoft")
 set(APP_AUTHOR "Artem Dontsov")
@@ -42,7 +42,7 @@ else()
   message(FATAL_ERROR "Failed to parse BASE_VERSION='${BASE_VERSION}'")
 endif()
 
-project(devtools VERSION 0.1 LANGUAGES CXX)
+project(devtools VERSION ${BASE_VERSION} LANGUAGES CXX)
 
 configure_file(build.h.in build.hpp @ONLY)
 configure_file(version.rc.in version.rc @ONLY)
@@ -64,6 +64,8 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network Gui LinguistTo
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network Gui LinguistTools)
 find_package(spdlog REQUIRED)
 find_package(nlohmann_json REQUIRED)
+find_package(Arrow REQUIRED)
+find_package(tinyxml2 REQUIRED)
 
 add_compile_definitions(UUID_SYSTEM_GENERATOR UUID_TIME_GENERATOR)
 
@@ -83,6 +85,20 @@ set(PROJECT_SOURCES
         models/modulenavigationmodel.cpp
         models/modulenavigationfiltermodel.hpp
         models/modulenavigationfiltermodel.cpp
+
+        # Data
+        data/abstractsource.hpp
+        data/abstractsource.cpp
+        data/abstractwriter.hpp
+        data/abstractwriter.cpp
+        data/abstractdata.hpp
+        data/abstractdata.cpp
+        data/tabulardata.hpp
+        data/tabulardata.cpp
+        data/dictionarydata.hpp
+        data/dictionarydata.cpp
+        data/transformer.hpp
+        data/transformer.cpp
 
         # Modules
         modules/moduleregistry.hpp
@@ -193,6 +209,8 @@ target_link_libraries(devtools PRIVATE Qt6::Widgets Qt6::Network Qt6::Gui)
 target_link_libraries(devtools PRIVATE spdlog::spdlog)
 target_link_libraries(devtools PUBLIC nlohmann_json::nlohmann_json)
 target_link_libraries(devtools PUBLIC yaml-cpp)
+# target_link_libraries(devtools PUBLIC tinyxml2::tinyxml2)
+target_link_libraries(devtools PRIVATE Arrow::arrow_shared)
 
 set_target_properties(devtools PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER devtools.dontsoft.com
