@@ -4,5 +4,7 @@
         <file alias="yaml-cpp/LICENSE">external/yaml-cpp/LICENSE</file>
         <file alias="spdlog/LICENSE">external/spdlog/LICENSE</file>
         <file alias="nlohmann-json/LICENSE">external/nlohmann-json/LICENSE.MIT</file>
+        <file alias="apache-arrow/LICENSE">external/apache-arrow/LICENSE.txt</file>
+        <file alias="tinyxml2/LICENSE">external/tinyxml2/LICENSE.txt</file>
     </qresource>
 </RCC>
