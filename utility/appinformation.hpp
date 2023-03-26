@@ -36,6 +36,12 @@ class AppInformation {
 
     void addThirdPartyInformation(const ThirdPartyInformation& information);
 
+    using ThirdPartyIterator = QList<ThirdPartyInformation>::const_iterator;
+    ThirdPartyIterator thirdPartyBegin() const;
+    ThirdPartyIterator thirdPartyEnd() const;
+
+    static QString compilerString();
+
 private:
     QMap<Type, QString> _values;
     QList<ThirdPartyInformation> _thirdPartyInformation;

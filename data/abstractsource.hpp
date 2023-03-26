@@ -1,26 +1,36 @@
 #ifndef DATAREADER_HPP
 #define DATAREADER_HPP
 
+#include <QObject>
 #include <QSharedDataPointer>
+#include <QVector>
+
+#include "abstractdata.hpp"
 
 namespace data
 {
     class AbstractData;
 
-    class AbstractSource
+    class AbstractSource : public QObject
     {
     public:
-        AbstractSource();
+        struct MetaData
+        {
+        };
+
+        explicit AbstractSource(QObject* parent = nullptr);
 
         virtual void read() = 0;
 
-        QSharedDataPointer<AbstractData> getData() const
-        {
-            return _data;
-        }
+        QSharedDataPointer<AbstractData> getData(int index = 0) const;
+
+        MetaData getMetaData(int index = 0) const;
+
+        int getDataCount() const;
 
     protected:
-        QSharedDataPointer<AbstractData> _data;
+        QVector<QSharedDataPointer<AbstractData>> _data;
+        QVector<MetaData> _dataMetaData;
     };
 } // namespace data
 

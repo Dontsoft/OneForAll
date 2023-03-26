@@ -6,5 +6,21 @@
         <file alias="nlohmann-json/LICENSE">external/nlohmann-json/LICENSE.MIT</file>
         <file alias="apache-arrow/LICENSE">external/apache-arrow/LICENSE.txt</file>
         <file alias="tinyxml2/LICENSE">external/tinyxml2/LICENSE.txt</file>
+        <file alias="simdjson/LICENSE">external/simdjson/LICENSE</file>
+        <file alias="spy/LICENSE">external/spy/LICENSE.md</file>
+    </qresource>
+    <qresource prefix="/">
+        <file alias="LICENSE">LICENSE</file>
+        <file alias="OneForAll.svg">logo/OneForAll.svg</file>
+        <file alias="OneForAll_16x16.png">logo/logos.iconset/icon_16x16.png</file>
+        <file alias="OneForAll_16x16@2.png">logo/logos.iconset/icon_16x16@2.png</file>
+        <file alias="OneForAll_32x32.png">logo/logos.iconset/icon_32x32.png</file>
+        <file alias="OneForAll_32x32@2.png">logo/logos.iconset/icon_32x32@2.png</file>
+        <file alias="OneForAll_128x128.png">logo/logos.iconset/icon_128x128.png</file>
+        <file alias="OneForAll_128x128@2.png">logo/logos.iconset/icon_128x128@2.png</file>
+        <file alias="OneForAll_256x256.png">logo/logos.iconset/icon_256x256.png</file>
+        <file alias="OneForAll_256x256@2.png">logo/logos.iconset/icon_256x256@2.png</file>
+        <file alias="OneForAll_512x512.png">logo/logos.iconset/icon_512x512.png</file>
+        <file alias="OneForAll_512x512@2.png">logo/logos.iconset/icon_512x512@2.png</file>
     </qresource>
 </RCC>

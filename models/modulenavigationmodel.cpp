@@ -41,7 +41,7 @@ QVariant ModuleNavigationModel::data(const QModelIndex &index, int role) const
         return icon;
     }
     case Qt::SizeHintRole: {
-        return QSize(128, 32);
+        return QSize(128, 28);
     }
     case ModuleNavigationModel::ModuleCategoryRole: {
         return module->getCategory();

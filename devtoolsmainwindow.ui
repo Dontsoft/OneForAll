@@ -99,6 +99,9 @@
      <height>24</height>
     </rect>
    </property>
+   <property name="defaultUp">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <resources/>

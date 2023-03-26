@@ -38,6 +38,9 @@ public slots:
     void updateWindowTitle(const QString& title = QString());
     void searchStringChanged(const QString& text);
 
+    void showAbout();
+    void showPreferences();
+
 private slots:
     void handleTreeViewSelection(const QModelIndex& current,
                                  const QModelIndex& previous);

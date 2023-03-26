@@ -11,9 +11,9 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
   endif()
 endif()
 
-set(BASE_VERSION 2023.0.0)
+set(BASE_VERSION 1.0.0)
 set(BASE_VERSION_META -alpha)
-set(APP_NAME "Devtools by dontsoft")
+set(APP_NAME "One for All")
 set(APP_AUTHOR "Artem Dontsov")
 set(APP_AUTHOR_MAIL "artem@dontsoft.com")
 set(APP_AUTHOR_WEBPAGE "https://dontsoft.com")
@@ -42,14 +42,13 @@ else()
   message(FATAL_ERROR "Failed to parse BASE_VERSION='${BASE_VERSION}'")
 endif()
 
-project(devtools VERSION ${BASE_VERSION} LANGUAGES CXX)
+project(OneForAll VERSION ${BASE_VERSION} LANGUAGES CXX)
 
 configure_file(build.h.in build.hpp @ONLY)
 configure_file(version.rc.in version.rc @ONLY)
 configure_file(${PROJECT_NAME}.rc.in ${PROJECT_NAME}.rc @ONLY)
 
 message("-- Version = ${PROJECT_VERSION}")
-
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -69,10 +68,11 @@ find_package(tinyxml2 REQUIRED)
 
 add_compile_definitions(UUID_SYSTEM_GENERATOR UUID_TIME_GENERATOR)
 
-set(TS_FILES devtools_de_DE.ts)
+set(TS_FILES OneForAll_de_DE.ts)
 
 set(PROJECT_SOURCES
         main.cpp
+        global.hpp
 
         resources.qrc
 
@@ -80,11 +80,25 @@ set(PROJECT_SOURCES
         devtoolsmainwindow.h
         devtoolsmainwindow.ui
 
+        # Widgets
+        widgets/fileuploadwidget.hpp
+        widgets/fileuploadwidget.cpp
+
+        # Dialogs
+        dialogs/aboutdialog.hpp
+        dialogs/aboutdialog.cpp
+        dialogs/aboutdialog.ui
+        dialogs/preferencesdialog.hpp
+        dialogs/preferencesdialog.cpp
+        dialogs/preferencesdialog.ui
+
         # Models
         models/modulenavigationmodel.hpp
         models/modulenavigationmodel.cpp
         models/modulenavigationfiltermodel.hpp
         models/modulenavigationfiltermodel.cpp
+        delegates/styledlistdelegate.hpp
+        delegates/styledlistdelegate.cpp
 
         # Data
         data/abstractsource.hpp
@@ -99,6 +113,9 @@ set(PROJECT_SOURCES
         data/dictionarydata.cpp
         data/transformer.hpp
         data/transformer.cpp
+
+        data/sources/jsonsource.hpp
+        data/sources/jsonsource.cpp
 
         # Modules
         modules/moduleregistry.hpp
@@ -145,9 +162,6 @@ set(PROJECT_SOURCES
         core/observer.hpp
         core/observable.hpp
 
-        widgets/fileuploadwidget.hpp
-        widgets/fileuploadwidget.cpp
-
         # Log
         log/loggable.hpp
         log/loggable.cpp
@@ -183,20 +197,41 @@ set(PROJECT_SOURCES
 
         # Third Party
         external/stduuid/uuid.h
+        external/simdjson/simdjson.h
+        external/simdjson/simdjson.cpp
+        external/spy/spy.hpp
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(devtools
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
+if (WIN32)
+
+    set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.rc")
+    qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${app_icon_resource_windows})
+
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        WIN32_EXECUTABLE TRUE
     )
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+
+elseif (APPLE)
+    set(MACOSX_BUNDLE_ICON_FILE logos.icns)
+    set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/logo/logos.icns")
+    set_source_files_properties(${app_icon_macos} PROPERTIES
+               MACOSX_PACKAGE_LOCATION "Resources")
+    qt_add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${PROJECT_SOURCES} ${app_icon_macos})
+
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        MACOSX_BUNDLE_GUI_IDENTIFIER oneforall.dontsoft.com
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+        MACOSX_BUNDLE_BUNDLE_NAME ${APP_NAME}
+        MACOSX_BUNDLE TRUE
+    )
 else()
-    add_executable(devtools
-        ${PROJECT_SOURCES}
-    )
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    qt_add_executable(photosurface ${PROJECT_SOURCES})
 endif()
+
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${APP_NAME})
+
+qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 
 set(YAML_BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
 set(YAML_CPP_BUILD_TESTS OFF CACHE INTERNAL "")
@@ -205,26 +240,14 @@ set(YAML_CPP_BUILD_CONTRIB OFF CACHE INTERNAL "")
 set(YAML_CPP_INSTALL OFF CACHE INTERNAL "")
 add_subdirectory(external/yaml-cpp)
 
-target_link_libraries(devtools PRIVATE Qt6::Widgets Qt6::Network Qt6::Gui)
-target_link_libraries(devtools PRIVATE spdlog::spdlog)
-target_link_libraries(devtools PUBLIC nlohmann_json::nlohmann_json)
-target_link_libraries(devtools PUBLIC yaml-cpp)
-# target_link_libraries(devtools PUBLIC tinyxml2::tinyxml2)
-target_link_libraries(devtools PRIVATE Arrow::arrow_shared)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets Qt6::Network Qt6::Gui)
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
+target_link_libraries(${PROJECT_NAME} PUBLIC nlohmann_json::nlohmann_json)
+target_link_libraries(${PROJECT_NAME} PUBLIC yaml-cpp)
+target_link_libraries(${PROJECT_NAME} PUBLIC tinyxml2::tinyxml2)
+target_link_libraries(${PROJECT_NAME} PRIVATE Arrow::arrow_shared)
 
-set_target_properties(devtools PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER devtools.dontsoft.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE_BUNDLE_NAME ${APP_NAME}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
 
-install(TARGETS devtools
+install(TARGETS OneForAll
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(devtools)
-endif()
