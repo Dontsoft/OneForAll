@@ -26,7 +26,8 @@ class PreferencesDialog : public QDialog,
 public:
     static const int RELOAD_REQUIRED = 0x1337;
 
-    explicit PreferencesDialog(QWidget *parent = nullptr);
+    explicit PreferencesDialog(const PreferencesDialog::Dependency &dependency,
+                               QWidget *parent = nullptr);
     ~PreferencesDialog();
 
     void applyClicked();
