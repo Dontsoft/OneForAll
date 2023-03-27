@@ -27,7 +27,8 @@ DevToolsMainWindow::DevToolsMainWindow(const Dependency& dependency,
                 QSharedPointer<AppInformation>, QSharedPointer<ModuleRegistry>>(
           dependency),
       Loggable("Mainwindow"), ui(new Ui::DevToolsMainWindow),
-      _navigationModel(new ModuleNavigationFilterModel(this))
+      _navigationModel(new ModuleNavigationFilterModel(
+          {getDependency<Dependencies::ConfigEngineDependency>()}, this))
 {
     ui->setupUi(this);
     const auto moduleRegistry

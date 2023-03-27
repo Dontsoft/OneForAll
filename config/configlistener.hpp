@@ -1,5 +1,4 @@
 #ifndef CONFIG_LISTENER_HPP
-
 #define CONFIG_LISTENER_HPP
 
 #include "configengine.hpp"

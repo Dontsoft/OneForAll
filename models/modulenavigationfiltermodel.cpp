@@ -1,9 +1,28 @@
 #include "modulenavigationfiltermodel.hpp"
 #include "modulenavigationmodel.hpp"
 
-ModuleNavigationFilterModel::ModuleNavigationFilterModel(QObject *parent)
-    : QSortFilterProxyModel{parent}
+#include "config/configengine.hpp"
+
+ModuleNavigationFilterModel::ModuleNavigationFilterModel(
+    const Dependency& dependency, QObject* parent)
+    : QSortFilterProxyModel{parent},
+      Dependant<QSharedPointer<ConfigEngine>>{dependency}, ConfigListener{}
 {
+    auto configEngine = getDependency<0>();
+    configEngine->subscribe(this);
+}
+
+void ModuleNavigationFilterModel::notificationReceived(
+    ConfigEngine* sender, const QString& key,
+    const QPair<QVariant, QVariant>& params)
+{
+    Q_UNUSED(sender)
+    Q_UNUSED(key)
+    Q_UNUSED(params)
+    if (key.startsWith("LoadedModules/"))
+    {
+        invalidateFilter();
+    }
 }
 
 bool ModuleNavigationFilterModel::filterAcceptsRow(
@@ -11,6 +30,13 @@ bool ModuleNavigationFilterModel::filterAcceptsRow(
 {
     auto regularExpression = filterRegularExpression();
     const auto index = sourceModel()->index(sourceRow, 0, sourceParent);
+    const QString identifier
+        = index.data(ModuleNavigationModel::ModuleIdentifierRole).toString();
+    auto configEngine = getDependency<0>();
+    if (configEngine->get<bool>("LoadedModules/" + identifier, true) == false)
+    {
+        return false;
+    }
     if (regularExpression.isValid())
     {
         return filterByRegularExpression(regularExpression, index);
